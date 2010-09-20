@@ -1,0 +1,5 @@
+%div{:id => "url-form", :align => "center"}
+  - form_for @image do |f|
+    = f.error_messages
+    = f.text_field :url, :size => 100, :value => "Url картинки"
+    = f.submit 'Запостить'

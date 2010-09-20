@@ -1,0 +1,16 @@
+#login-form
+  - if session[:user_id].nil?
+    - form_tag do
+      %div
+        = label_tag :email, "Ваш e-mail?"
+        = text_field_tag :email, params[:email]
+      %div
+        = label_tag :password, "Ваш пароль?"
+        = password_field_tag :password, params[:password]
+      %div
+        = submit_tag "Войти!", :id => "login-submit" 
+        или  
+        = link_to "Зарегистрироваться", register_path
+  - else 
+    %div
+      Вы уже вошли

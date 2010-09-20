@@ -1,0 +1,31 @@
+- if logged_in?
+  = render :partial => "new"
+
+.content{:align => "center"}  
+  - @images.each do |image|
+    %div{:id => "image-#{image.id}", :class => "image"}
+      = link_to image_tag(image.url, :border => false, :id => image.id), {:action => :show, :id => image} 
+      %br
+      %div{:class => "image-rating"}
+        - if logged_in?         
+          = link_to_remote "+", :update => "image-#{image.id}-rating", :url => {:action => :rating_up, :id => image} 
+
+          %span{:id => "image-#{image.id}-rating"}
+            0
+
+        - if logged_in?                       
+          = link_to_remote "-", :update => "image-#{image.id}-rating", :url => {:action => :rating_down, :id => image}  
+          %br
+      
+      - if logged_in? && current_user.id == 1
+        = link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete
+
+      %div{:id => "image-#{image.id}-info", :class => "image-info"}
+        Запостил 
+        = image.user ? image.user.name : 'anonymous' 
+        on 
+        = image.created_at.strftime("%d/%m/%y")
+        %br
+
+  %br
+    

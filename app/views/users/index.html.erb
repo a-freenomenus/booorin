@@ -1,0 +1,9 @@
+<% @users.each do |user| %>
+<%=h user.name %> 
+<%=h user.email %>
+<%= link_to 'Show', user %>
+<%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %>
+<br />
+<% end %>
+
+<br />
